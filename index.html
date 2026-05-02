@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedLine • New Era of LifeSteal</title>
+    
+    <link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. Core Variables & Setup --- */
+        :root {
+          --bg: #050202;
+          --bg-accent: #1a0505;
+          --primary-red: #ef4444;
+          --secondary-red: #b91c1c;
+          --glass: rgba(255, 255, 255, 0.03);
+          --border: rgba(239, 68, 68, 0.2);
+          --text: #f8fafc;
+          --muted: #94a3b8;
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: "Space Grotesk", sans-serif;
+        }
+
+        body {
+          background-color: var(--bg);
+          background-image: radial-gradient(circle at top, var(--bg-accent) 0%, var(--bg) 80%);
+          color: var(--text);
+          overflow-x: hidden;
+          min-height: 100vh;
+        }
+
+        /* --- 2. Animations --- */
+        @keyframes float {
+          0% { transform: translateY(0px) rotate(-1deg); }
+          50% { transform: translateY(-25px) rotate(1deg); }
+          100% { transform: translateY(0px) rotate(-1deg); }
+        }
+
+        .particle {
+          position: fixed;
+          top: -10%;
+          background-color: var(--primary-red);
+          border-radius: 50%;
+          opacity: 0.3;
+          pointer-events: none;
+          z-index: 1;
+          animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+          0% { transform: translateY(0vh) scale(0); opacity: 0.6; }
+          50% { opacity: 0.4; }
+          100% { transform: translateY(100vh) scale(1); opacity: 0; }
+        }
+
+        /* --- 3. Typography & Gradients --- */
+        .red-gradient {
+          background: linear-gradient(135deg, var(--primary-red) 0%, var(--secondary-red) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-weight: 800;
+        }
+
+        .italic { font-style: italic; }
+
+        /* --- 4. Navigation --- */
+        .page-nav {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          display: flex;
+          gap: 10px;
+          z-index: 999;
+        }
+
+        .page-nav a {
+          padding: 10px 20px;
+          border-radius: 12px;
+          text-decoration: none;
+          font-weight: 700;
+          color: var(--text);
+          background: var(--glass);
+          border: 1px solid var(--border);
+          backdrop-filter: blur(10px);
+          font-size: 0.75rem;
+          transition: 0.3s;
+        }
+
+        .page-nav .active {
+          background: linear-gradient(135deg, var(--primary-red), var(--secondary-red));
+          color: #fff;
+          border: none;
+          box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }
+
+        /* --- 5. Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .site-logo {
+            width: 450px;
+            max-width: 90%;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 30px rgba(239, 68, 68, 0.5));
+            animation: float 6s ease-in-out infinite; 
+        }
+
+        /* --- 6. The Matrix Card System --- */
+        section { padding: 80px 10%; position: relative; z-index: 2; }
+        .title { text-align: center; font-size: 2.8rem; margin-bottom: 50px; }
+
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 25px;
+          justify-content: center;
+        }
+
+        .card {
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid var(--border);
+          padding: 40px 30px;
+          border-radius: 2rem;
+          backdrop-filter: blur(15px);
+          transition: 0.4s ease;
+          text-align: center;
+        }
+
+        .card:hover {
+          transform: translateY(-10px);
+          border-color: var(--primary-red);
+          background: rgba(239, 68, 68, 0.05);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 15px auto;
+            border: 3px solid var(--border);
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- 7. Buttons & Tiers --- */
+        .btn-red {
+          background: linear-gradient(90deg, var(--secondary-red), var(--primary-red));
+          color: #fff;
+          font-weight: 800;
+          text-transform: uppercase;
+          border: none;
+          padding: 14px 30px;
+          border-radius: 12px;
+          cursor: pointer;
+          text-decoration: none;
+          display: inline-block;
+          transition: 0.3s;
+          font-size: 0.85rem;
+          letter-spacing: 1px;
+        }
+
+        .btn-red:hover {
+          filter: brightness(1.2);
+          box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
+        }
+
+        .role-pill {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            text-transform: uppercase;
+        }
+
+        .text-owner { color: #f8fafc; background: var(--secondary-red); }
+        .text-dev { color: var(--primary-red); }
+        .text-mod { color: #22c55e; }
+        .text-partner { color: #fbbf24; }
+
+        footer { text-align: center; padding: 60px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; }
+    </style>
+</head>
+
+<body>
+
+    <nav class="page-nav">
+        <a href="index.html" class="active">HOME</a>
+        <a href="rules.html">RULES</a>
+        <a href="store.html">STORE</a>
+        <a href="crates.html">CRATES</a>
+    </nav>
+
+    <header class="hero">
+        <img src="https://i.ibb.co/mV1yJYFz/nobg-logo-hero-sec.png" 
+             class="site-logo" 
+             alt="RedLine Logo" 
+             border="0">
+        
+        <p class="italic" style="color: var(--primary-red); font-size: 1.2rem; letter-spacing: 2px; margin-top: 20px;">
+            SURVIVAL REBORN • THE RED FRONTIER
+        </p>
+        
+        <div style="margin-top: 40px;">
+            <p style="margin-bottom: 15px; font-weight: 700; color: #fff; font-size: 1.2rem;"> 🌐 play.redlinesmp.fun</p>
+            <a href="https://discord.gg/UPnkvdS9D3" target="_blank" class="btn-red">Join the Discord</a>
+        </div>
+    </header>
+
+    <section id="staff">
+        <h2 class="title red-gradient">Executive Team</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://cdn.discordapp.com/avatars/1222472465884647474/ca15f6ce6dbd85320fb4d8caa3f4acc5.png?size=1024" alt="ThePritam">
+                <div class="role-pill text-owner">OWNER</div>
+                <h3>ThePritam</h3>
+                <p style="color: var(--muted); margin-top: 10px;">The Project Owner</p>
+            </div>
+
+            <div class="card">
+                <img src="https://cdn.discordapp.com/avatars/1221086492890239057/b34205f6c31c8313e2fbdfe1a258fc7d.png?size=1024" alt="Kakashi">
+                <div class="role-pill text-dev">DEVELOPER</div>
+                <h3>Not Crystle</h3>
+                <p style="color: var(--muted); margin-top: 10px;">Lead Systems Engineer</p>
+            </div>
+
+            <div class="card">
+                <img src="https://cdn.discordapp.com/avatars/1284010354434773053/3a48e1b9ea978b796005b96e8a355571.png?size=1024" alt="Golden">
+                <div class="role-pill text-mod">Manager</div>
+                <h3>GoldenCamp</h3>
+                <p style="color: var(--muted); margin-top: 10px;">Community Manager</p>
+            </div>
+
+            <div class="card">
+                <img src="https://cdn.discordapp.com/avatars/1155123550080999485/b7b79579bdc4c6132670448f7182ffae.png?size=1024" alt="Sushant">
+                <div class="role-pill text-partner">PARTNER</div>
+                <h3>Sushant (Angara)</h3>
+                <p style="color: var(--muted); margin-top: 10px;">Content Affiliate</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 RedLine Network • Designed by <span class="red-gradient">The Nexus</span></p>
+    </footer>
+
+    <script>
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + 'vw';
+            const size = Math.random() * 6 + 2 + 'px';
+            particle.style.width = size;
+            particle.style.height = size;
+            particle.style.animationDuration = Math.random() * 4 + 3 + 's';
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 7000);
+        }
+        setInterval(createParticle, 200);
+    </script>
+</body>
+</html>
